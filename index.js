@@ -1,5 +1,10 @@
+const express = require("express");
 const convertVideo = require("./convertVideo");
+require("dotenv").config();
 var fs = require("fs");
+
+const app = express();
+const port = process.env.SERVER_PORT || 3000;
 
 async function init() {
   //input file
@@ -19,4 +24,10 @@ async function init() {
   }
 }
 
-init();
+app.get("/", (req, res) => {
+  init();
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
